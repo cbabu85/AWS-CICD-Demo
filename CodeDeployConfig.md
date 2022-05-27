@@ -1,0 +1,20 @@
+# Installing the CodeDeploy agent on EC2
+
+sudo yum update -y
+sudo yum install -y ruby wget
+wget https://aws-codedeploy-eu-west-1.s3.eu-west-1.amazonaws.com/latest/install
+chmod +x ./install
+sudo ./install auto
+sudo service codedeploy-agent status
+
+# Go to CLI and create bucket - Install CLI if not installed
+aws configure --profile devopscicd
+Enter AWS Access Key ID =                    # create AWS access key ID if not created for the user from IAM -->User --> Access Keys 
+Enter AWS Secret Access Key = ""
+Enter default Region Name = ""
+Enter output format = json
+
+
+# create a bucket and enable versioning
+aws s3 mb s3://mybucketdevops123 --region us-east-1 --profile devopscicd
+aws s3api put-bucket-versioning --bucket mybucketdevops123 --versioning-configuration Status=Enabled --region us-east-1 --profile devopscicd
